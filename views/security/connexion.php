@@ -1,29 +1,39 @@
-<div class="row mt-5">
-
-<div class="card">
-    <div class="card-header">
-        Login Form
-    </div>
-    <div class="card-body">
-        <form>
+<div class="d-block top m-0 p-0 col-4 bg-white m-auto font-weight-bold rounded shadow-sm" style="z-index:1;">
+    <h2 class=" m-0 col-12 text-white w-100 bgcolor1" style="font-size: 20px;">
+        <p class="p-4 bgcolor1">Login Form</p>
+    </h2>
+    <div class="m-4 pb-1">
+        <?php
+        if (isset($err_login)) {
+        ?>
+            <small id="helpId" class="text-danger"><?= $err_login ?></small>
+        <?php
+        }
+        ?>
+        <form method="post" action="<?=WEBROOT?>security/seConnecter">
             <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <input type="text" class="form-control" name="login" id="login" autocomplete="on" placeholder="Login" style="height: 50px;">
+                <?php
+                if (isset($erreurs['login'])) {
+                ?>
+                    <small id="helpId" class="text-danger"><?= $erreurs['login'] ?></small>
+                <?php
+                }
+                ?>
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <input type="password" class="form-control" name="password" id="password" autocomplete="on" placeholder="Password" style="height: 50px;">
+                <?php
+                if (isset($erreurs['password'])) {
+                ?>
+                    <small id="helpId" class="text-danger"><?= $erreurs['password'] ?></small>
+                <?php
+                }
+                ?> </div>
+            <div class="mb-5">
+                <button type="submit" name="btn_connexion" id="connexion" class="mr-5 btn bgcolor1 text-white" style="height: 40px; width:120px;">Connexion</button>
+                <a href="<?=WEBROOT?>security/inscription" class="text-black-50">S'inscrire pour jouer?</a>
             </div>
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Connexion</button>
-    </form>
+        </form>
     </div>
-    
-</div>
-
-
 </div>

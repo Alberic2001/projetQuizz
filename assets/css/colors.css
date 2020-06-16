@@ -1,6 +1,7 @@
 .bgcolor1{
     background-color: #51bfd0;
 }
+
 .bgcolor1-op10{
     background-color: #51bfd0;
     opacity: 10%;
@@ -21,9 +22,14 @@
 .bgcolor5{
     background-color: #818181;
 }
-
+.color5{
+    color: #818181;
+}
 .bgcolor6{
     background-color: #e56946;
+}
+.bgcolor7{
+    background-color: #f8f3f0;
 }
 
 .opensans{
