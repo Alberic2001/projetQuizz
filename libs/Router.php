@@ -35,7 +35,8 @@ class Router
                               } else {
                                     require_once "controllers/Errors.php";
                                     $this->ctrl = new Errors();
-                                    $this->ctrl->showError("Cette Methode n'existe pas");
+                                    //$this->ctrl->showError("Cette Methode n'existe pas")
+                                    //$this->ctrl->render();
                               }
                         } else {
                               require_once "controllers/Errors.php";
@@ -51,7 +52,8 @@ class Router
             } catch (Exception $ex) {
                   require_once "controllers/Errors.php";
                   $this->ctrl = new Errors();
-                  $this->ctrl->showError($ex->getMessage());
+                  //$this->ctrl->showError($ex->getMessage())
+                  $this->ctrl->render();
             }
       }
 }

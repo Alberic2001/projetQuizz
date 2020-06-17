@@ -21,7 +21,7 @@ session_start();
         <div class="position-relative container p-0 w-100 m-auto col-3 rounded shadow bg-white" style="height: 60%;">
             <div class="container w-100 bg-white d-flex align-items-center justify-content-center" style="height: 50%; background: linear-gradient(#fff, #51bfd0);">
                 <div class="container bg-dark rounded-circle m-2" style="height: 100px; width: 100px; border-color: #51bfd0; border-width: 10px;">
-
+                    <img src="<?=WEBROOT?>assets/images/uploads/<?= $_SESSION['user']->getAvatar() ?>" alt="profil">
                 </div>
                 <?php
                 if (isset($_SESSION['user'])) {
@@ -32,10 +32,10 @@ session_start();
                 ?>
             </div>
             <div class="nav flex-column nav-pills m-auto" role="tablist" aria-orientation="vertical">
-                <a class="nav-link rounded-0 color5" href="<?= WEBROOT ?>security/listerQuestions" style="height: 10%;">Lister Questions</a>
-                <a class="nav-link rounded-0 color5" href="<?= WEBROOT ?>security/inscription" style="height: 10%;">Créer Admin</a>
-                <a class="nav-link rounded-0 color5" href="<?= WEBROOT ?>security/listerJoueurs" style="height: 10%;">Lister Joueurs</a>
-                <a class="nav-link rounded-0 color5" href="<?= WEBROOT ?>security/creerQuestion" style="height: 10%;">Créer Questions</a>
+                <a class="nav-link rounded-0 color5" id="id1" href="<?= WEBROOT ?>security/listerQuestions" style="height: 10%;">Lister Questions</a>
+                <a class="nav-link rounded-0 color5" id="id2" href="<?= WEBROOT ?>security/inscription" style="height: 10%;">Créer Admin</a>
+                <a class="nav-link rounded-0 color5" id="id3" href="<?= WEBROOT ?>security/listerJoueurs" style="height: 10%;">Lister Joueurs</a>
+                <a class="nav-link rounded-0 color5" id="id4" href="<?= WEBROOT ?>security/creerQuestion" style="height: 10%;">Créer Questions</a>
             </div>
         </div>
 
@@ -78,18 +78,25 @@ session_start();
 
 <script type="text/javascript">
 
-const links = document.getElementsByTagName("a");
-links[0].addEventListener("click", function(e){
-        links[0].classList.value +=" active ";
+link1 = document.getElementById("id1");
+link2 = document.getElementById("id2");
+link3 = document.getElementById("id3");
+link4 = document.getElementById("id4");
+
+link1.addEventListener("click", function(event){
+    link1.classList.add("active");
 });
-links[1].addEventListener("click", function(e){
-        links[1].classList.value +=" active ";
-});  
-links[2].addEventListener("click", function(e){
-        links[2].classList.value +=" active ";
-});  
-links[3].addEventListener("click", function(e){
-        links[3].classList.value +=" active ";
-});   
+
+link2.addEventListener("click", function(event){
+    link2.classList.add("active");
+});
+
+link3.addEventListener("click", function(event){
+    link3.classList.add("active");
+});
+
+link4.addEventListener("click", function(event){
+    event.target.classList.add("active");
+});
 
 </script>

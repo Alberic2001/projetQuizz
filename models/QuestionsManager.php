@@ -8,7 +8,7 @@ class QuestionsManager extends Manager{
         return $this->ExecuteUpdate($sql)!=0;
      }
      public function update($objet){
- 
+
      }
      public  function delete($id){
         

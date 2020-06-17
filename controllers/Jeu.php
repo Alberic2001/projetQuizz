@@ -1,6 +1,6 @@
 <?php
 
-class Jue extends Controller
+class Jeu extends Controller
 {
 
    public function __construct()

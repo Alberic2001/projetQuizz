@@ -96,20 +96,20 @@ class Security extends Controller
                $question->setLibelleTypeQuestion("texte");
                $question->setPoints($nbrePoints);
 
-               if($questionsManager->create($question)){
+               if ($questionsManager->create($question)) {
                   var_dump($libelleQuestion);
                   $idRef = $questionsManager->getId($libelleQuestion);
                   var_dump($idRef);
-               $reponseTexte = new Reponse();
-               $reponseTexte->setLibelleReponse($reponses[0]);
-               $reponseTexte->setLibelleQuestion($libelleQuestion);
-               $reponseTexte->setStatut("true");
+                  $reponseTexte = new Reponse();
+                  $reponseTexte->setLibelleReponse($reponses[0]);
+                  $reponseTexte->setLibelleQuestion($libelleQuestion);
+                  $reponseTexte->setStatut("true");
 
-               $reponseTexte->setIdQuestions($idRef);
+                  $reponseTexte->setIdQuestions($idRef);
 
-               $reponseManager->create($reponseTexte);
+                  $reponseManager->create($reponseTexte);
 
-               $this->data['createSuccess'] = "La question a été créée";
+                  $this->data['createSuccess'] = "La question a été créée";
                }
                $this->layout = "layout_admin";
                $this->views = "creerQuestions";
@@ -181,7 +181,27 @@ class Security extends Controller
 
    public function listerQuestions()
    {
-
+      if (isset($_POST['btn_submit'])) {
+         extract($_POST);
+         $this->validator->is_positif($questionNumberPerGame, 'errorNumber');
+         if ($this->validator->is_valid()) {
+            if ($questionNumberPerGame >= 5) {
+               $jeuManager = new JeuManager();
+               $jeu = new Jeu();
+               $jeu->setNbreQuestionsPerGame($questionNumberPerGame);
+               if (count($jeuManager->findAll()) === 0) {
+                  $jeuManager->create($jeu);
+               } else {
+                  $jeuManager->update($questionNumberPerGame);
+               }
+            } else {
+               $this->data['supFive'] = "Doit être supérior à 5";
+            }
+         } else {
+            $erreurs = $this->validator->getErrors();
+            $this->data['erreurs'] = $erreurs;
+         }
+      }
       $this->layout = "layout_admin";
       $this->views = "listerQuestions";
       $this->render();
@@ -299,17 +319,16 @@ class Security extends Controller
                $this->manager = new UserManager();
                if (count($this->manager->getUserByLogin($pseudo)) <= 0) {
                   if (isset($_SESSION['user']) && $_SESSION['user']->getProfil() == "admin") {
-                        $user = new User();
-                        $user->setFullName($prenom . " " . $nom);
-                        $user->setLogin($pseudo);
-                        $user->setPwd($password);
+                     $user = new User();
+                     $user->setFullName($prenom . " " . $nom);
+                     $user->setLogin($pseudo);
+                     $user->setPwd($password);
 
-                        if ($this->uploadUserProfileImage($user) === true) {
-                           $this->manager->create($user);
-                           $this->data['creationSuccess'] = "L'utilisateur a été créé";
-                        }
-                        $this->inscription();
-                     
+                     if ($this->uploadUserProfileImage($user) === true) {
+                        $this->manager->create($user);
+                        $this->data['creationSuccess'] = "L'utilisateur a été créé";
+                     }
+                     $this->inscription();
                   }
 
                   if ($_SESSION == null) {
@@ -359,9 +378,9 @@ class Security extends Controller
          session_destroy();
          header("Status: 301 Moved Permanently", false, 301);
          header("Location: http://localhost/base/Pour%20M.WANE/projetQuizz/");
+         $this->views = "connexion";
+         $this->render();
          exit;
       }
    }
-
-
 }

@@ -1,11 +1,13 @@
 <div class="container p-3 w-100 color5 col-8 m-auto rounded shadow bg-white d-flex flex-column justify-content-space-between align-items-stretch" style="height: 95%;">
     <span class="w-100 text-center">
-        <form action="" method="post">
+        <form action="<?= WEBROOT ?>security/listerQuestions" method="post">
             <div class="form-group">
                 <label for="questionNumberPerGame" class="d-inline col-3" style="font-size: 14pt;">Nbre de question/Jeu</label>
-                <input type="text" name="questionNumberPerGame" id="questionNumberPerGame" class="form-control d-inline col-1" placeholder="" aria-describedby="helpId">
+                <input type="text" name="questionNumberPerGame" value="<?=$questionNumberPerGame?>" id="questionNumberPerGame" class="form-control d-inline col-1" placeholder="" aria-describedby="helpId">
                 <button type="submit" name="btn_submit" class="btn bgcolor4 rounded shadow text-white col-1">OK</button>
             </div>
+            <small><?php if(isset($erreurs['questionNumberPerGame'])){ echo $erreurs['questionNumberPerGame']; } ?></small>
+            <small><?php if(isset($erreurs['supFive'])){ echo $erreurs['supFive']; } ?></small>
         </form>
     </span>
     <div class="m-2 p-2 h-75 border border-primary rounded text-dark" id="questionsContainer" style="font-size: 11pt; overflow: scroll;">
